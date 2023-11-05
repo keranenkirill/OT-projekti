@@ -28,3 +28,8 @@ class TestMaksukortti(unittest.TestCase):
         self.assertEqual(f, False)
         t = self.maksukortti.ota_rahaa(999)
         self.assertEqual(t, True)
+
+    def test_palauttaa_oikean_muunnoksen_senteista_euroiksi(self):
+        self.maksukortti.lataa_rahaa(111)
+        self.maksukortti.saldo_euroina()
+        self.assertEqual(str(self.maksukortti), "Kortilla on rahaa 11.11 euroa")
