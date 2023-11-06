@@ -31,4 +31,3 @@ class Maksukortti:
         saldo_euroissa = round(self.saldo / 100, 2)
 
         return "Kortilla on rahaa {:0.2f} euroa".format(saldo_euroissa)
-        

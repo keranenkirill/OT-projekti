@@ -1,11 +1,13 @@
 import unittest
-from maksukortti import Maksukortti
+from maksukortti import Maksukortti 
 
 class TestMaksukortti(unittest.TestCase):
     def setUp(self):
         self.kortti = Maksukortti(1000)
 
-
+    def test_hello_world(self):
+        self.assertEqual("Hello world", "Hello world")
+    
     def test_konstruktori_asettaa_saldon_oikein(self):
         self.assertEqual(str(self.kortti), "Kortilla on rahaa 10.00 euroa")
 
