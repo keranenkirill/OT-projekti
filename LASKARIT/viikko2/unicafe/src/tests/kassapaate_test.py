@@ -121,9 +121,9 @@ class TestKassapaate(unittest.TestCase):
       self.assertEqual(self.maksukortti.saldo, 150000)
       self.assertEqual(self.kassassa_rahaa.kassassa_rahaa, 150000)
    
-    def ei_voi_ladatanegatiivista_summaa_kortille_ja_kassapäätteelle_palauttaa_return(self):
+    def test_ei_voi_ladatanegatiivista_summaa_kortille_ja_kassapäätteelle_palauttaa_return(self):
       self.maksukortti = Maksukortti(100000)
-      self.assertEqual(self.kassassa_rahaa.lataa_rahaa_kortille(self.maksukortti, -50000),True)# testattu falsen tilalla myös None
+      self.assertEqual(self.kassassa_rahaa.lataa_rahaa_kortille(self.maksukortti, -50000),False)# testattu falsen tilalla myös None
       self.assertEqual(self.maksukortti.saldo, 100000)
       self.assertEqual(self.kassassa_rahaa.kassassa_rahaa, 100000)
 
