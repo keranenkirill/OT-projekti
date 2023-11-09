@@ -7,5 +7,7 @@
 
 ## Budjetointisovellus
 - ### Dokumentaatio
-   - [_Työaikakirjanpito_](./dokumentaatio/tuntikirjanpito.md)
-   - [_Vaatimusmäärittely_](./dokumentaatio/vaatimusmaarittely.md)
+   - [_Työaikakirjanpito_](./OT_harjoitustyo/dokumentaatio/tuntikirjanpito.md)
+   - [_Vaatimusmäärittely_](./OT_harjoitustyo/dokumentaatio/vaativuusmaarittely.md)
+
+   
