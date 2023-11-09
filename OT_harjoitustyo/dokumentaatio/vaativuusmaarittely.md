@@ -10,9 +10,9 @@ Sovelluksella on ainoastaan yksi käyttäjärooli eli _normaali käyttäjä_.
 
 ## Käyttöliittymäluonnos
 
-Sovellus koostuu kuudestas eri näkymästä
+Sovellus koostuu kuudesta eri näkymästä:
 
-![](./OHTE_harjoitustyo_luonnos_budjettisovellus.pdf)
+[**_kuva käyttöliittymäluonnoksesta_**](./OHTE_harjoitustyo_luonnos_budjettisovellus.pdf)
 
 Sovellus aukeaa kirjautumisnäkymään, josta on mahdollista siirtyä uuden käyttäjän luomisnäkymään tai onnistuneen kirjautumisen yhteydessä kirjaantuneen käyttäjän budjetti-näkymään.
 
