@@ -43,11 +43,11 @@ def create_user(uname, psswd):
 
 def add_expence(amnt, descrptn, usr_id):
    try:
-      print("  ",amnt, descrptn, usr_id)
+      print("  ",amnt, descrptn)
       db.execute("INSERT INTO Expenses (amount, description, user_id) VALUES (?, ?, ?)", [amnt, descrptn, usr_id])
-      print("     LISÄTTY EXPENCE KÄYTTÄJÄLLE ",user_id,":", " MÄÄRÄ:", amnt, " KUVAUS:", descrptn)
+      print("     LISÄTTY EXPENCE KÄYTTÄJÄLLE ",usr_id,":", " MÄÄRÄ:", amnt, " KUVAUS:", descrptn)
    except:
-      print("     EXPENCEN LISÄÄMISESSÄ ILMENNYT ONGELMA")
+      print("     EXPENSEN LISÄÄMISESSÄ ILMENNYT ONGELMA")
 
 
 
@@ -75,7 +75,7 @@ def get_summ_of_all_expenses(user_id):
 
 def add_income(src, amnt, usr_id):
    try:
-      print("   ",src, amnt, usr_id)
+      #print("   ",src, amnt, usr_id)
       db.execute("INSERT INTO Incomes (source, amount, user_id) VALUES (?, ?, ?)", [src, amnt, usr_id])
       print("     LISÄTTY INCOME KÄYTTÄJÄLLE ",user_id,":"," LÄHDE:", src, " MÄÄRÄ:", amnt)
    except:
