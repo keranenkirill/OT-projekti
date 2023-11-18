@@ -6,6 +6,7 @@
 # OT harjoitustyö:
 
 ## Budjetointisovellus
+- [_Projektikansio_](./OT_harjoitustyo/BudjettiSovellus)
 - ### Dokumentaatio
    - [_Työaikakirjanpito_](./OT_harjoitustyo/dokumentaatio/tuntikirjanpito.md)
    - [_Vaatimusmäärittely_](./OT_harjoitustyo/dokumentaatio/vaativuusmaarittely.md)
