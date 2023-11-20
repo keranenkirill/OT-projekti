@@ -2,11 +2,11 @@
 
 ## Sovelluksen tarkoitus
 
-Sovelluksen avulla käyttäjien on mahdollista toteuttaa budjetointia, eli seurata tuloja ja menoja. Sovellusta on mahdollista käyttää useamman rekisteröityneen käyttäjän, joilla kaikilla on omien tapreiden mukaan luottu budjetti.
+Sovelluksen avulla käyttäjien on mahdollista laskea tulot ja menot. 
 
 ## Käyttäjät
 
-Sovelluksella on ainoastaan yksi käyttäjärooli eli _normaali käyttäjä_. 
+Sovelluksella on ainoastaan yksi käyttäjärooli. 
 
 ## Käyttöliittymäluonnos
 
@@ -14,7 +14,7 @@ Sovellus koostuu kuudesta eri näkymästä:
 
 [**_kuva käyttöliittymäluonnoksesta_**](./OHTE_harjoitustyo_luonnos_budjettisovellus.pdf)
 
-Sovellus aukeaa kirjautumisnäkymään, josta on mahdollista siirtyä uuden käyttäjän luomisnäkymään tai onnistuneen kirjautumisen yhteydessä kirjaantuneen käyttäjän budjetti-näkymään.
+Sovellus aukeaa kirjautumisnäkymään, josta on mahdollista siirtyä uuden käyttäjän luomisnäkymään tai kirjautuneena päänäkymään.
 
 ## Perusversion tarjoama toiminnallisuus
 
@@ -24,7 +24,7 @@ Sovellus aukeaa kirjautumisnäkymään, josta on mahdollista siirtyä uuden käy
   - Käyttäjätunnuksen täytyy olla uniikki
 - Käyttäjä voi kirjautua järjestelmään
   - Kirjautuminen onnistuu syötettäessä olemassaoleva käyttäjätunnus ja salasana kirjautumislomakkeelle
-  - Jos käyttäjää ei olemassa, tai salasana ei täsmää, ilmoittaa järjestelmä tästä virheviestillä
+  - Jos käyttäjää ei olemassa, tai salasana ei täsmää,niin ilmestyy virheviesti
 
 ### Kirjautumisen jälkeen
 
@@ -36,10 +36,8 @@ Sovellus aukeaa kirjautumisnäkymään, josta on mahdollista siirtyä uuden käy
 
 ## Jatkokehitysideoita
 
-Perusversion jälkeen järjestelmää täydennetään ajan salliessa esim. seuraavilla toiminnallisuuksilla:
-
 - Oleamassa olevien yksittäisten tulojen/menojen muokkaaminen 
-- Käyttäjätiimit, jotka näkevät kaikki yhteiset todot
+- Käyttäjätiimit, jotka näkevät kaikki yhteiset budjetit
 - Mahdollisuus useampaan erilliseen budjettinäkymään
 - Käyttäjätunnuksen poisto kaikkineen tietoineen
 - Graaffista sisältöä (charts)
