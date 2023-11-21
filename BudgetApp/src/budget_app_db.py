@@ -5,13 +5,13 @@ import math
 try:
    print("ALUSTETAAN TIETOKANTA...")
    # poistaa tietokannan alussa (kätevä moduulin testailussa)
-   os.remove("OT-projekti/OT_harjoitustyo/BudjettiSovellus/budget_app_db.db")
+   os.remove("OT-projekti/BudgetApp/src/budget_app_db.db")
    print("  TIETOKANTA POISTETTU ONNISTUNEESTI")
 except:
    # mikäli tietokantaa ei ollut vielä olemassa, niin exceptionilla virheviesti
    print("  TIETOKANTAA EI VOITU POISTAA, SILLÄ SE EI OLE OLEMASSA")
 try:
-   db = sqlite3.connect("OT-projekti/OT_harjoitustyo/BudjettiSovellus/budget_app_db.db")
+   db = sqlite3.connect("OT-projekti/BudgetApp/src/budget_app_db.db")
    db.isolation_level = None  
    print("  TIETOKANTA LUOTU ONNISTUNEESTI")
 except:
