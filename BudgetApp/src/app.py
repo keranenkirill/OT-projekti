@@ -1,7 +1,7 @@
 from budget_app_db import DataBaseApp
 
 budget_app = DataBaseApp()
-budget_app.init_database()
+print(budget_app.init_database())
 budget_app.create_tables()
 
 print("\n\nLISÄTÄÄN KÄYTTÄJÄ:")

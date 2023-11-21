@@ -7,19 +7,24 @@ class DataBaseApp:
         self.db = None
 
     def init_database(self):
-        try:
-            print("ALUSTETAAN TIETOKANTA...")
-            os.remove(self.db_path)
-            print("  TIETOKANTA POISTETTU ONNISTUNEESTI")
-        except:
-            print("  TIETOKANTAA EI VOITU POISTAA, SILLÄ SE EI OLE OLEMASSA")
+      try:
+         print("ALUSTETAAN TIETOKANTA...")
+         os.remove(self.db_path)
+         print("  TIETOKANTA POISTETTU ONNISTUNEESTI")
+      except:
+         print("  TIETOKANTAA EI VOITU POISTAA, SILLÄ SE EI OLE OLEMASSA")
+         return False
 
-        try:
-            self.db = sqlite3.connect(self.db_path)
-            self.db.isolation_level = None
-            print("  TIETOKANTA LUOTU ONNISTUNEESTI")
-        except:
-            print("  TIETOKANNAN UUDELLEENLUOMISESSA ONGELMIA")
+      try:
+         self.db = sqlite3.connect(self.db_path)
+         self.db.isolation_level = None
+         print("  TIETOKANTA LUOTU ONNISTUNEESTI")
+      except:
+         print("  TIETOKANNAN UUDELLEENLUOMISESSA ONGELMIA")
+         return False
+      return True
+
+
 
     def create_tables(self):
         self.db.execute("CREATE TABLE Users (user_id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(50) NOT NULL, password TEXT NOT NULL);")
