@@ -8,3 +8,10 @@
 | 18.11. | 3,5  |  Budjetti-sovelluksen sql-skeeman luonti, sekä kovakoodattu tietokanta-testaus |
 | 21.11. | 1    |  Projekti kansion rakenteen refaktorointi |
 | 21.11. | 3    |  Projekti-koodin refaktorointia, ensimmäisen testin luonti, harjoitustyö-tehtävien suorittaminen 1 -> 5:een kohtaan asti (invoke tehtävässä ongelmia). |
+| 22.11. | 5   |  budget_app_db_test.py refaktorointi ja uusien testien lisääminen, sekä budget_app_db.py rafaktoroitu |
+
+
+
+
+
+
