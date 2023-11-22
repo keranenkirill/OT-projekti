@@ -1,8 +1,8 @@
 from budget_app_db import DataBaseApp
 
 budget_app = DataBaseApp()
-print(budget_app.init_database())
-budget_app.create_tables()
+budget_app.init_database()
+print(budget_app.create_tables())
 
 print("\n\nLISÄTÄÄN KÄYTTÄJÄ:")
 user_id = budget_app.create_user("ErkKa", "NappiKukkaro01")
