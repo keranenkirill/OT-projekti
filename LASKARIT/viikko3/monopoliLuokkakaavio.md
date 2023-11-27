@@ -13,7 +13,7 @@
 
     Pelinappula "1" -- "1" Pelaaja
 
-    Pelaaja "1" -- "1...n" KadunRuutu: pelaajan omistama ruutu
+    Pelaaja "1" -- "0...x" KadunRuutu: pelaajan omistama ruutu (x-määrä)
     Pelaaja "1" -- "0..n" Raha: pelaajalla rahaa 0-n verran
     
     Ruutu "1" -- "0..8" Pelaaja
