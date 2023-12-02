@@ -5,6 +5,9 @@ description = ""
 authors = ["keranenkirill <keranen.kirill@gmail.com>"]
 readme = "README.md"
 
+[package]
+include = ["src/*.py"]
+
 [tool.poetry.dependencies]
 python = "^3.8"
 invoke = "^2.2.0"
@@ -13,6 +16,7 @@ invoke = "^2.2.0"
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.3"
 coverage = "^7.3.2"
+pylint = "^3.0.2"
 
 [build-system]
 requires = ["poetry-core"]
