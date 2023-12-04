@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 from views.view import View  # pylint: disable=import-error
 
 
@@ -57,8 +58,11 @@ class LoginView(View):
             self.password.config(show="*")
 
     def login_action(self):
-        if self.master.controller.login(self.username.get(), self.password.get()):
-            pass
+        #messagebox.showinfo("lets goo next logged view","now should open the main budget view ")
+        self.master.controller.load_budget_view()
+        #if self.master.controller.login(self.username.get(), self.password.get()):
+            #messagebox.showinfo("now should open the main budget view ")
+            #self.master.controller.load_budget_view()
             # lets goo next logged view
 
     def register_action(self):

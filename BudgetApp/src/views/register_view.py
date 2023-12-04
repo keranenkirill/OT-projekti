@@ -8,7 +8,6 @@ class RegisterView(View):
     def __init__(self, parent, *args, **kwargs):
         super().__init__(parent, bg="#1C2142", *args, **kwargs)
         self.pack(side=tk.LEFT, fill=tk.BOTH, pady=2, expand=True)
-
         self.widgets()
 
     def widgets(self):
@@ -59,11 +58,11 @@ class RegisterView(View):
         rp = self.rpassword.get()
 
         if u and p and rp:
-            if p == rp:
+            if p == rp and u != None or u != "":
                 if self.master.controller.register(u, p):
                     self.master.controller.load_login_view(account=u)
             else:
-                messagebox.showinfo("Password mismatch",
+                messagebox.showinfo("Check password or username",
                                     "Please enter a valid password")
         else:
             messagebox.showinfo("Error", "Please enter a valid username")
