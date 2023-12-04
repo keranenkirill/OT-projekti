@@ -12,3 +12,6 @@
 
 ## Viikko 5
 
+#### Viikko5
+- Kirjautumis- ja käyttäjän luomis-ikkunat toimintakunnossa (tietokanta yhdistämättä)
+- Asennusohjeet

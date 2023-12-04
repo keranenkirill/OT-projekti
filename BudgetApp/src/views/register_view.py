@@ -61,7 +61,7 @@ class RegisterView(View):
         if u and p and rp:
             if p == rp:
                 if self.master.controller.register(u, p):
-                    self.master.controller.loadLoginView(account=u)
+                    self.master.controller.load_login_view(account=u)
             else:
                 messagebox.showinfo("Password mismatch",
                                     "Please enter a valid password")
