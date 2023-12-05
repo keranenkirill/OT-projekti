@@ -15,6 +15,7 @@
 - [_Vaatimusmäärittely_](./BudgetApp/dokumentaatio/vaativuusmaarittely.md)
 - [_Arkkitehtuurikuvaus_]() (tulossa)
 - [_Testausdokumentti_](./BudgetApp/dokumentaatio/testaus.md)
-- [_Komentorivitoiminnot_](./BudgetApp/dokumentaatio/komentorivikomennot.md) ohjelman asennusta ja suorittamista varten
+- #### Ohjeet
+   - [_Komentorivitoiminnot_](./BudgetApp/dokumentaatio/komentorivikomennot.md) ohjelman asennusta ja suorittamista varten
 
    
