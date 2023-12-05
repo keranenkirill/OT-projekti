@@ -58,7 +58,7 @@ class RegisterView(View):
         rp = self.rpassword.get()
 
         if u and p and rp:
-            if p == rp and u != None or u != "":
+            if p == rp and u is not None or u != "":
                 if self.master.controller.register(u, p):
                     self.master.controller.load_login_view(account=u)
             else:

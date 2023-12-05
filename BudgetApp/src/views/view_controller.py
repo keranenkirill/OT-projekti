@@ -1,7 +1,7 @@
 import database  # pylint: disable=import-error
 from views.login_view import LoginView  # pylint: disable=import-error
 from views.register_view import RegisterView  # pylint: disable=import-error
-from views.budget_view import BudgetView
+from views.budget_view import BudgetView # pylint: disable=import-error
 
 
 class ViewController():
@@ -33,4 +33,3 @@ class ViewController():
 
     def register(self, username, password):
         return self.db.create_user(username, password)
-

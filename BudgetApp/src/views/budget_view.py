@@ -1,24 +1,26 @@
 import tkinter as tk
 from tkinter import ttk
-import database
 from tkinter import messagebox
+import database  # pylint: disable=import-error
 from views.view import View  # pylint: disable=import-error
 
 
 class BudgetView(View):
-   def __init__(self, parent, *args, account="", **kwargs):
-      super().__init__(parent, *args, **kwargs,  bg="#1e453e")
-      self.pack(side=tk.LEFT, fill=tk.BOTH, pady=2, expand=True)
-      self.widgets()
+    def __init__(self, parent, *args, account="", **kwargs):
+        super().__init__(parent, *args, **kwargs,  bg="#1e453e")
+        self.pack(side=tk.LEFT, fill=tk.BOTH, pady=2, expand=True)
+        self.widgets()
 
-   def widgets(self):
+    def widgets(self):
         # Back button
-        back_button = tk.Button(self, text="LogOut", command=self.logout_action)
+        back_button = tk.Button(self, text="LogOut",
+                                command=self.logout_action)
         back_button.pack(side=tk.TOP, anchor=tk.NE, padx=10, pady=10)
 
         # First Treeview (on the left)
         columns = ("Income Amount", "Source", "Category")
-        self.treeview = ttk.Treeview(self, columns=columns, show="headings", selectmode="browse")
+        self.treeview = ttk.Treeview(
+            self, columns=columns, show="headings", selectmode="browse")
 
         # Define column headings
         for col in columns:
@@ -34,8 +36,8 @@ class BudgetView(View):
 
         # Example data (replace this with your actual data)
         data = [
-            ( "OP pankki", 50000, "Palkka"),
-            ( "mökku vuokraus", 800, "Sijoitukset"),
+            ("OP pankki", 50000, "Palkka"),
+            ("mökku vuokraus", 800, "Sijoitukset"),
             # Add more data as needed
         ]
 
@@ -44,8 +46,10 @@ class BudgetView(View):
             self.treeview.insert("", tk.END, values=item)
 
         # Second Treeview (on the right)
-        columns2 = ("Expense Amount", "Description", "Category")  # Replace with your desired column names
-        self.treeview2 = ttk.Treeview(self, columns=columns2, show="headings", selectmode="browse")
+        # Replace with your desired column names
+        columns2 = ("Expense Amount", "Description", "Category")
+        self.treeview2 = ttk.Treeview(
+            self, columns=columns2, show="headings", selectmode="browse")
 
         # Define column headings for the second Treeview
         for col in columns2:
@@ -58,8 +62,8 @@ class BudgetView(View):
         self.treeview2.column("Category", width=130)
 
         data2 = [
-            ( "MökkiLaina", 500, "Laina"),
-            ( "DNA-lasku", 80, "Laskut"),
+            ("MökkiLaina", 500, "Laina"),
+            ("DNA-lasku", 80, "Laskut"),
             # Add more data as needed
         ]
 
@@ -70,27 +74,26 @@ class BudgetView(View):
         # Pack the second Treeview
         self.treeview2.pack(side=tk.RIGHT, anchor=tk.NE, padx=10, pady=10)
 
+    def logout_action(self):
+        self.master.controller.load_login_view()
 
-   def logout_action(self):
-      self.master.controller.load_login_view()
+    def add_income_action(self):
+        pass
 
-   def add_income_action(self):
-      pass
+    def add_expense_action(self):
+        pass
 
-   def add_expense_action(self):
-      pass
+    def remove_expense_action(self):
+        # TODO:
+        # message box to confirm deleting
+        pass
 
-   def remove_expense_action(self):
-      # TODO:
-      # message box to confirm deleting
-      pass
+    def remove_income_action(self):
+        # TODO:
+        # message box to confirm deleting
+        pass
 
-   def remove_income_action(self):
-      # TODO:
-      # message box to confirm deleting
-      pass
-
-   def drop_curren_budget_action(self):
-      # TODO:
-      # message box to confirm deleting
-      pass
+    def drop_curren_budget_action(self):
+        # TODO:
+        # message box to confirm deleting
+        pass
