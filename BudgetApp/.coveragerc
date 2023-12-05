@@ -1,3 +1,3 @@
 [run]
 source = src
-omit = src/**/__init__.py, src/tests/**, src/app.py, src/views/app_view.py, src/views/login_view.py, src/views/register_view.py, src/views/view_controller.py, src/views/view.py, src/dbapp.py 
+omit = src/**/__init__.py, src/tests/**, src/app.py, src/views/app_view.py, src/views/login_view.py, src/views/register_view.py, src/views/view_controller.py, src/views/view.py, src/dbapp.py, src/views/budget_view.py 
