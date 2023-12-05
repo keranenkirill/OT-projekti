@@ -12,6 +12,10 @@
 
 ## Viikko 5
 
-#### Viikko5
+### Viikko4
 - Kirjautumis- ja käyttäjän luomis-ikkunat toimintakunnossa (tietokanta yhdistämättä)
+
+### Viikko5
+- BudgetView-näkymä (suurimmaksi osaksi tuotantovaiheessa)
 - Asennusohjeet
+
