@@ -6,13 +6,15 @@
 # OT harjoitustyö:
 
 ## Budjetointisovellus
-- [_Projektikansio_](./BudgetApp)
-- ### Dokumentaatio
-   - [_Työaikakirjanpito_](./BudgetApp/dokumentaatio/tuntikirjanpito.md)
-   - [_Vaatimusmäärittely_](./BudgetApp/dokumentaatio/vaativuusmaarittely.md)
-   - [_Arkkitehtuurikuvaus_]() tulossa
-   - [_Testausdokumentti_](./BudgetApp/dokumentaatio/testaus.md)
-   - [_Changelog_]() tulossa
-   - [_Komentorivitoiminnot_](./BudgetApp/dokumentaatio/komentorivikomennot.md) ohjelman asennusta ja suorittamista varten
+[Release1 (pre-release)](https://github.com/keranenkirill/OT-projekti/releases)
+
+### Dokumentaatio
+[_Projektikansio_](./BudgetApp)
+- [_Changelog_](./BudgetApp/dokumentaatio/Changelog.md)
+- [_Työaikakirjanpito_](./BudgetApp/dokumentaatio/tuntikirjanpito.md)
+- [_Vaatimusmäärittely_](./BudgetApp/dokumentaatio/vaativuusmaarittely.md)
+- [_Arkkitehtuurikuvaus_]() (tulossa)
+- [_Testausdokumentti_](./BudgetApp/dokumentaatio/testaus.md)
+- [_Komentorivitoiminnot_](./BudgetApp/dokumentaatio/komentorivikomennot.md) ohjelman asennusta ja suorittamista varten
 
    
