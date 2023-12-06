@@ -58,12 +58,23 @@ class LoginView(View):
             self.password.config(show="*")
 
     def login_action(self):
-        #messagebox.showinfo("lets goo next logged view","now should open the main budget view ")
-        self.master.controller.load_budget_view()
-        #if self.master.controller.login(self.username.get(), self.password.get()):
-            #messagebox.showinfo("now should open the main budget view ")
-            #self.master.controller.load_budget_view()
-            # lets goo next logged view
+        # Get username and password from the input fields
+        username = self.username.get()
+        password = self.password.get()
+
+        if username and password:
+            if self.master.controller.login(username, password):
+                self.master.controller.load_budget_view()
+            else:
+                 messagebox.showinfo("Login Error","Invalid username or password. Please try again.")
+        else:
+            messagebox.showinfo("Login Error","Please enter both username and password.")
+            #messagebox.showinfo("lets goo next logged view","now should open the main budget view ")
+            
+            #if self.master.controller.login(self.username.get(), self.password.get()):
+                #messagebox.showinfo("now should open the main budget view ")
+                #self.master.controller.load_budget_view()
+                # lets goo next logged view
 
     def register_action(self):
         self.master.controller.load_register_view()

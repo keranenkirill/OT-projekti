@@ -33,3 +33,6 @@ class ViewController():
 
     def register(self, username, password):
         return self.db.create_user(username, password)
+
+    def log_out(self):
+        pass

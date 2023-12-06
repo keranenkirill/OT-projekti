@@ -52,20 +52,22 @@ class RegisterView(View):
         self.rpassword = rpwdentry
 
     def register_action(self):
-        print("regisering...ok... welcome")
+        print("registering....")
+        
         u = self.username.get()
         p = self.password.get()
         rp = self.rpassword.get()
 
         if u and p and rp:
-            if p == rp and u is not None or u != "":
+            if p == rp and u != "":
                 if self.master.controller.register(u, p):
                     self.master.controller.load_login_view(account=u)
+                else:
+                    messagebox.showinfo("Registration Failed", "Username already exists. Please choose a different username.")
             else:
-                messagebox.showinfo("Check password or username",
-                                    "Please enter a valid password")
+                messagebox.showinfo("Check password", "Passwords do not match. Please enter a valid password.")
         else:
-            messagebox.showinfo("Error", "Please enter a valid username")
+            messagebox.showinfo("Error", "Please enter a valid username and password.")
 
     def back_action(self):
         self.master.controller.load_login_view()
