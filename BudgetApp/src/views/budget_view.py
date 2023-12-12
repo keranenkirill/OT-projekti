@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter import messagebox
 import database  # pylint: disable=import-error
 from views.view import View  # pylint: disable=import-error
+from views.transaction_view import TransactionView
 
 
 class BudgetView(View):
@@ -11,73 +12,66 @@ class BudgetView(View):
         self.pack(side=tk.LEFT, fill=tk.BOTH, pady=2, expand=True)
         self.widgets()
 
+
+
     def widgets(self):
         # Back button
-        back_button = tk.Button(self, text="LogOut",
-                                command=self.logout_action)
+        back_button = tk.Button(self, text="LogOut", command=self.logout_action)
         back_button.pack(side=tk.TOP, anchor=tk.NE, padx=10, pady=10)
 
-        # First Treeview (on the left)
-        columns = ("Income Amount", "Source", "Category")
-        self.treeview = ttk.Treeview(
-            self, columns=columns, show="headings", selectmode="browse")
+        style = ttk.Style()
+        style.configure("TNotebook.Tab", padding=[10,5], font=("Helvetica", 14))  # Change font size here
 
-        # Define column headings
-        for col in columns:
-            self.treeview.heading(col, text=col)
+        
+        columns = ["Amount", "Category", "Description"]
+        categories = ("Income", "Expenses")
+        data = []
 
-        # Set column widths
-        self.treeview.column("Income Amount", width=130)
-        self.treeview.column("Source", width=130)
-        self.treeview.column("Category", width=130)
 
-        # Pack the first Treeview
-        self.treeview.pack(side=tk.LEFT, anchor=tk.NW, padx=10, pady=10)
+        views = ttk.Notebook(self)
 
-        # Example data (replace this with your actual data)
-        data = [
-            ("OP pankki", 50000, "Palkka"),
-            ("mökku vuokraus", 800, "Sijoitukset"),
-            # Add more data as needed
-        ]
+        expenses_frame = TransactionView(views, props={
+            "columns": ["Amount", "Description", "Category"],
+            "categories": ["Expense"],
+            "data": self.master.controller.get_expenses()
+        })
 
-        # Insert data into the first Treeview
-        for item in data:
-            self.treeview.insert("", tk.END, values=item)
 
-        # Second Treeview (on the right)
-        # Replace with your desired column names
-        columns2 = ("Expense Amount", "Description", "Category")
-        self.treeview2 = ttk.Treeview(
-            self, columns=columns2, show="headings", selectmode="browse")
+        incomes_frame = TransactionView(views, props={
+            "columns": ["Amount", "Source", "Category"],
+            "categories": ["Income"],
+            "data": self.master.controller.get_incomes()
+        })
 
-        # Define column headings for the second Treeview
-        for col in columns2:
-            self.treeview2.heading(col, text=col)
 
-        # Set column widths for the second Treeview
-        # Replace with your desired column widths
-        self.treeview2.column("Expense Amount", width=130)
-        self.treeview2.column("Description", width=130)
-        self.treeview2.column("Category", width=130)
+        all_frame = TransactionView(views, props={
+            "columns": columns,
+            "categories": ["Income", "Expenses"],
+            "data": data
+        })
 
-        data2 = [
-            ("MökkiLaina", 500, "Laina"),
-            ("DNA-lasku", 80, "Laskut"),
-            # Add more data as needed
-        ]
+        #wallet_frame = ttk.Frame(views)
 
-        # Insert data into the first Treeview
-        for item in data2:
-            self.treeview2.insert("", tk.END, values=item)
+        views.add(expenses_frame, text="Expenses")
+        views.add(incomes_frame, text="Incomes")
+        views.add(all_frame, text="All")
+        #views.add(wallet_frame, text="My Wallet")
 
-        # Pack the second Treeview
-        self.treeview2.pack(side=tk.RIGHT, anchor=tk.NE, padx=10, pady=10)
+
+        views.pack(expand=True, fill=tk.BOTH)
+
+
+
+
+
+      
 
     def logout_action(self):
+        self.master.config.setAuth("", None)
         self.master.controller.load_login_view()
 
     def add_income_action(self):
+        self.master.controller.add_income(src, amnt, self.master.config.id)
         pass
 
     def add_expense_action(self):
