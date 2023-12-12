@@ -12,3 +12,7 @@
 - BudgetView-näkymä (suurimmaksi osaksi tuotantovaiheessa)
 - Asennusohjeet
 
+### Viikko6
+- BudgetView-näkymä kehittämistä: voidaan lisätä ja poistaa tulot/menot. Tietokanta toimii tässä. Tulojen ja menojen muokkaus osittain toimii (bugi: ensimmäisellä kerralla joutuu kirjautumaan ulos ja sitten uudeleen sisälle jotta voidaan muokata olemassa olevia tuloja/menoja)
+
+

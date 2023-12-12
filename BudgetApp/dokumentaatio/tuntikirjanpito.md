@@ -19,7 +19,10 @@
 | 1.12.  |  5   | projektin jatkamista build, pylint, invoke, formatointi, changelog |
 | 4.12.  |  6   | uuden näkymän luonti BudgetView(vielä tuotantovaiheessa), koodin siistimistä, muiden tiedostojen lisäämistä ja muokkaamista, kuten READNE.md muokkaus   |
 | 5.12.  |  3   | Changelog päivitystä, Release-tehtävä (pre-release)|
-| sum(h) |  68,5  |  
+| 6.12.  |  5   | Budget viewin uudistamisen aloitus ja toiminallisuuksien kehittämistä|
+| 9.12.  |  6   | Budget viewin kehittämistä toiminallisuuksien kanssa|
+| 12.12.  |  6   | RELEASE2(pre-release), koodin refaktorointia, bugien korjausta ja tietokannan yhdistämistä|
+| sum(h) |  85,5  |  
 
 
 
