@@ -1,12 +1,10 @@
 # **Aineopintojen harjoitustyö: ohjelmistotekniikka, syksy 2023**
 
-[LASKARIT](https://github.com/keranenkirill/OT-projekti/tree/main/LASKARIT)
-
 
 # OT harjoitustyö:
 
 ## Budjetointisovellus
-[Release1 (pre-release)](https://github.com/keranenkirill/OT-projekti/releases)
+[Release2 (pre-release)](https://github.com/keranenkirill/OT-projekti/releases/tag/viikko6)
 
 ### Dokumentaatio
 [_Projektikansio_](./BudgetApp)
