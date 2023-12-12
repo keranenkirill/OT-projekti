@@ -4,6 +4,7 @@ from views.register_view import RegisterView  # pylint: disable=import-error
 from views.budget_view import BudgetView # pylint: disable=import-error
 
 
+
 class ViewController():
 
     def __init__(self, app):
@@ -26,13 +27,46 @@ class ViewController():
     def load_budget_view(self):
         if self.context:
             self.context.destroy()
-            self.context = BudgetView(self.root)
+        self.context = BudgetView(self.root)
+
 
     def login(self, username, password):
         return self.db.login_user(username, password)
 
     def register(self, username, password):
         return self.db.create_user(username, password)
+
+
+    def get_expenses(self):
+        return self.db.get_expenses(self.root.config.id)
+
+    def get_incomes(self):
+        print("USER", self.root.config.id)
+        return self.db.get_incomes(self.root.config.id)
+
+    
+    def add_income(self, *args):
+        print("inputtei", *args)
+        return self.db.add_income(*args, usr_id=self.root.config.id)
+    
+    def upd_income(self, *args):
+        return self.db.update_income(*args, usr_id=self.root.config.id)
+    
+    def add_expense(self, *args):
+        return self.db.add_expense(*args, usr_id=self.root.config.id)
+
+    def upd_expense(self, *args):
+        return self.db.update_expense(*args, usr_id=self.root.config.id)
+        
+
+    def del_expense(self, *args):
+        return self.db.delete_expense(*args, usr_id=self.root.config.id)
+
+    def del_income(self, *args):
+        return self.db.delete_income(*args, usr_id=self.root.config.id)
+
+
+
 
     def log_out(self):
         pass
