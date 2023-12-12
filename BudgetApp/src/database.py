@@ -75,27 +75,27 @@ class DBController:
               ": MÄÄRÄ:", amnt, " KUVAUS:", descrptn)
 
     @staticmethod
-    def delete_expense(amnt, descrptn, category, usr_id):
+    def delete_expense(amnt, descrptn, category, expense_id, usr_id):
         return DBController.execute_statement(
-            "DELETE FROM Expenses WHERE amount = ? AND description = ? AND category = ? AND user_id = ?",
-            [amnt, descrptn, category, usr_id])
+            "DELETE FROM Expenses WHERE amount = ? AND description = ? AND category = ? AND expense_id=? AND user_id = ?",
+            [amnt, descrptn, category, expense_id, usr_id])
         print("DELETED EXPENSE FOR USER", usr_id, "WITH AMOUNT:", amnt, "DESCRIPTION:", descrptn)
 
     @staticmethod
-    def delete_income(amnt, source, category, usr_id):
+    def delete_income(amnt, source, category, income_id, usr_id):
         return DBController.execute_statement(
-            "DELETE FROM Incomes WHERE amount = ? AND source = ? AND category = ? AND user_id = ?",
-            [amnt, source, category, usr_id])
+            "DELETE FROM Incomes WHERE amount = ? AND source = ? AND category = ? AND income_id=? AND user_id = ?",
+            [amnt, source, category, income_id, usr_id])
         print("DELETED EXPENSE FOR USER", usr_id, "WITH AMOUNT:", amnt, "DESCRIPTION:", source)
 
     @staticmethod
     def get_expenses(user_id):
         kaikki_kulut = DBController.execute_statement(
-            "SELECT Expenses.amount,  Expenses.description, Expenses.category FROM Expenses, Users WHERE Users.user_id = Expenses.user_id AND Users.user_id =?;",
+            "SELECT Expenses.amount,  Expenses.description, Expenses.category, Expenses.expense_id FROM Expenses, Users WHERE Users.user_id = Expenses.user_id AND Users.user_id =?;",
             [user_id]).fetchall()  # pylint: disable=line-too-long
         print("     HAETTU KÄYTTÄJÄN", user_id, "KAIKKI KULUT:")
         for kulu in kaikki_kulut:
-            print("     ", kulu[1], ":", kulu[0])
+            print("     ", kulu[1], ":", kulu[0], "id",":", kulu[3])
         return kaikki_kulut
 
     @staticmethod
@@ -114,24 +114,24 @@ class DBController:
             [src, amnt, category, usr_id])  # pylint: disable=line-too-long
 
     @staticmethod
-    def update_income(amnt, source, category, usr_id):
+    def update_income(amnt, source, category, income_id, usr_id):
         return DBController.execute_statement(
-            "UPDATE Incomes SET amount=?, source=?, category=? WHERE user_id=?",
-            [amnt, source, category, usr_id])
+            "UPDATE Incomes SET amount=?, source=?, category=? WHERE user_id=? AND  income_id=?",
+            [amnt, source, category, usr_id, income_id])
 
-    def update_expense(amnt, description, category, usr_id):
+    def update_expense(amnt, description, category, expense_id, usr_id):
         return DBController.execute_statement(
-            "UPDATE Expenses SET amount=?, description=?, category=? WHERE user_id=?",
-            [amnt, description, category, usr_id])
+            "UPDATE Expenses SET amount=?, description=?, category=? WHERE user_id=? AND expense_id=?",
+            [amnt, description, category, usr_id, expense_id])
 
     @staticmethod
     def get_incomes(user_id):
         kaikki_tulot = DBController.execute_statement(
-            "SELECT Incomes.amount,  Incomes.source, Incomes.category FROM Incomes, Users WHERE Users.user_id = Incomes.user_id AND Users.user_id =?;", 
+            "SELECT Incomes.amount,  Incomes.source, Incomes.category, Incomes.income_id FROM Incomes, Users WHERE Users.user_id = Incomes.user_id AND Users.user_id =?;", 
             [user_id]).fetchall()  # pylint: disable=line-too-long
         print("     HAETTU KÄYTTÄJÄN", user_id, "KAIKKI TULOT:")
         for tulo in kaikki_tulot:
-            print("     ", tulo[1], ":", tulo[0])
+            print("     ", tulo[1], ":", tulo[0], "id", tulo[3])
         return kaikki_tulot
 
     @staticmethod

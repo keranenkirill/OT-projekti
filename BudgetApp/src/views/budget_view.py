@@ -61,11 +61,6 @@ class BudgetView(View):
         views.pack(expand=True, fill=tk.BOTH)
 
 
-
-
-
-      
-
     def logout_action(self):
         self.master.config.setAuth("", None)
         self.master.controller.load_login_view()

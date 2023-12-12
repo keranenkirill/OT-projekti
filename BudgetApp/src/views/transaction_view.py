@@ -132,7 +132,8 @@ class TransactionView(View):
         selected = self.treeview.selection()
         if selected:
             values = self.treeview.item(selected, "values")
-
+            print(values)
+            selected_item_id=values[3]
             window = tk.Toplevel(self.master)
             window.title("Edit Row")
 
@@ -143,13 +144,12 @@ class TransactionView(View):
                 entry = tk.Entry(window)
                 entry.grid(row=i, column=1, padx=10, pady=5)
                 entry.insert(0, values[i])
-                #TODO: korjattava toiminallisuus
                 entries.append(entry)
 
 
             save_btn = tk.Button(window,
                         text="Save Changes",
-                        command=lambda : self.save_edit_action(selected, entries, window))
+                        command=lambda : self.save_edit_action(selected, entries, window, selected_item_id))
             
             save_btn.grid(row=len(self.props["columns"]) + 1, 
                             columnspan=len(self.props["columns"]) - 1, 
@@ -158,8 +158,10 @@ class TransactionView(View):
     
 
 
-    def save_edit_action(self, selected, entries, window):
+    def save_edit_action(self, selected, entries, window, selected_item_id):
+        item_id = selected_item_id
         values = [entry.get() for entry in entries if entry.get() is not None]
+        values.append(item_id)
         if not values[0] or not values[1] or not values[2] :
             messagebox.showerror("Wrong input", "Please add values for all columns.")
             return
@@ -215,7 +217,8 @@ class TransactionView(View):
             for item_id in selected:
                 item = self.treeview.item(item_id)
                 values = item['values']
-                print(f"Selected values: {values}")
+                #print(f"Selected values: {values}")
+                
                 if values[2] == "Expense":
                     if self.controller.del_expense(*values):
                         print("Deleted selected row(s)")
