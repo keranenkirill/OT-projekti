@@ -46,10 +46,10 @@ class DBController:
     @staticmethod
     def create_user(uname, psswd):
         DBController.execute_statement(
-            "INSERT INTO Users (username, password) VALUES (?, ?)", 
+            "INSERT INTO Users (username, password) VALUES (?, ?)",
             [uname, psswd])
         user_id = DBController.db.execute(
-            "SELECT Users.user_id FROM Users WHERE Users.username =?", 
+            "SELECT Users.user_id FROM Users WHERE Users.username =?",
             [uname]).fetchone()
         print("     LISÄTTY ONNISTUNEESTI KAYTTÄJÄ:",
               uname, " id:", user_id[0])
@@ -58,7 +58,7 @@ class DBController:
     @staticmethod
     def login_user(username, password):
         result = DBController.execute_statement(
-            "SELECT username, password, user_id FROM Users WHERE username=?", 
+            "SELECT username, password, user_id FROM Users WHERE username=?",
             [username]).fetchone()
         print(result)
         if result is not None:
@@ -79,14 +79,16 @@ class DBController:
         return DBController.execute_statement(
             "DELETE FROM Expenses WHERE amount = ? AND description = ? AND category = ? AND expense_id=? AND user_id = ?",
             [amnt, descrptn, category, expense_id, usr_id])
-        print("DELETED EXPENSE FOR USER", usr_id, "WITH AMOUNT:", amnt, "DESCRIPTION:", descrptn)
+        print("DELETED EXPENSE FOR USER", usr_id,
+              "WITH AMOUNT:", amnt, "DESCRIPTION:", descrptn)
 
     @staticmethod
     def delete_income(amnt, source, category, income_id, usr_id):
         return DBController.execute_statement(
             "DELETE FROM Incomes WHERE amount = ? AND source = ? AND category = ? AND income_id=? AND user_id = ?",
             [amnt, source, category, income_id, usr_id])
-        print("DELETED EXPENSE FOR USER", usr_id, "WITH AMOUNT:", amnt, "DESCRIPTION:", source)
+        print("DELETED EXPENSE FOR USER", usr_id,
+              "WITH AMOUNT:", amnt, "DESCRIPTION:", source)
 
     @staticmethod
     def get_expenses(user_id):
@@ -95,22 +97,25 @@ class DBController:
             [user_id]).fetchall()  # pylint: disable=line-too-long
         print("     HAETTU KÄYTTÄJÄN", user_id, "KAIKKI KULUT:")
         for kulu in kaikki_kulut:
-            print("     ", kulu[1], ":", kulu[0], "id",":", kulu[3])
+            print("     ", kulu[1], ":", kulu[0], "id", ":", kulu[3])
         return kaikki_kulut
 
     @staticmethod
     def get_summ_of_all_expenses(user_id):
         kulujen_yhteissumma = DBController.execute_statement(
-            "SELECT SUM(Expenses.amount) FROM Expenses, Users WHERE Users.user_id = Expenses.user_id AND Users.user_id =?;", 
+            "SELECT SUM(Expenses.amount) FROM Expenses, Users WHERE Users.user_id = Expenses.user_id AND Users.user_id =?;",
             [user_id]).fetchone()  # pylint: disable=line-too-long
         print("     HAETTU KÄYTTÄJÄN", user_id, "KULUJEN YHTEISSUMMA:")
         print("     ", kulujen_yhteissumma[0])
-        return kulujen_yhteissumma[0]
+        if kulujen_yhteissumma is not None and kulujen_yhteissumma[0] is not None:
+            return kulujen_yhteissumma[0]
+        else:
+            return 0
 
     @staticmethod
     def add_income(amnt, src, category, usr_id):
         return DBController.execute_statement(
-            "INSERT INTO Incomes (source, amount, category, user_id) VALUES (?, ?, ?, ?)", 
+            "INSERT INTO Incomes (source, amount, category, user_id) VALUES (?, ?, ?, ?)",
             [src, amnt, category, usr_id])  # pylint: disable=line-too-long
 
     @staticmethod
@@ -127,7 +132,7 @@ class DBController:
     @staticmethod
     def get_incomes(user_id):
         kaikki_tulot = DBController.execute_statement(
-            "SELECT Incomes.amount,  Incomes.source, Incomes.category, Incomes.income_id FROM Incomes, Users WHERE Users.user_id = Incomes.user_id AND Users.user_id =?;", 
+            "SELECT Incomes.amount,  Incomes.source, Incomes.category, Incomes.income_id FROM Incomes, Users WHERE Users.user_id = Incomes.user_id AND Users.user_id =?;",
             [user_id]).fetchall()  # pylint: disable=line-too-long
         print("     HAETTU KÄYTTÄJÄN", user_id, "KAIKKI TULOT:")
         for tulo in kaikki_tulot:
@@ -137,17 +142,20 @@ class DBController:
     @staticmethod
     def get_all_incomes_expenses(user_id):
         kaikkit_tulot_menot = DBController.execute_statement(
-            "SELECT Incomes.amount,  Incomes.source, Expenses.amount, Expenses.description FROM Incomes, Expenses, Users WHERE Users.user_id = Incomes.user_id AND Users.user_id =?;", 
+            "SELECT Incomes.amount,  Incomes.source, Expenses.amount, Expenses.description FROM Incomes, Expenses, Users WHERE Users.user_id = Incomes.user_id AND Users.user_id =?;",
             [user_id]).fetchall()
 
     @staticmethod
     def get_summ_of_all_incomes(user_id):
         tulojen_yhteissumma = DBController.execute_statement(
-            "SELECT SUM(Incomes.amount) FROM Incomes, Users WHERE Users.user_id = Incomes.user_id AND Users.user_id =?;", 
+            "SELECT SUM(Incomes.amount) FROM Incomes, Users WHERE Users.user_id = Incomes.user_id AND Users.user_id =?;",
             [user_id]).fetchone()  # pylint: disable=line-too-long
         print("     HAETTU KÄYTTÄJÄN", user_id, "TULOJEN YHTEISSUMMA:")
         print("     ", tulojen_yhteissumma[0])
-        return tulojen_yhteissumma[0]
+        if tulojen_yhteissumma is not None and tulojen_yhteissumma[0] is not None:
+            return tulojen_yhteissumma[0]
+        else:
+            return 0
 
     @staticmethod
     def get_income_expense_diff(user_id):
