@@ -3,9 +3,6 @@ from tkinter import messagebox
 from views.view import View  # pylint: disable=import-error
 
 
-profileID = "weoijte9wjty94w3rjgriojfo"
-
-
 class LoginView(View):
 
     def __init__(self, parent, *args, account="", **kwargs):
@@ -69,18 +66,13 @@ class LoginView(View):
             id = self.master.controller.login(username, password)
             if id is not None:
                 self.master.config.setAuth(username, id)
-                #self.master.controller.load_budget_view()
                 self.master.controller.load_budget_view()
             else:
-                 messagebox.showinfo("Login Error","Invalid username or password. Please try again.")
+                messagebox.showinfo(
+                    "Login Error", "Invalid username or password. Please try again.")
         else:
-            messagebox.showinfo("Login Error","Please enter both username and password.")
-            #messagebox.showinfo("lets goo next logged view","now should open the main budget view ")
-            
-            #if self.master.controller.login(self.username.get(), self.password.get()):
-                #messagebox.showinfo("now should open the main budget view ")
-                #self.master.controller.load_budget_view()
-                # lets goo next logged view
+            messagebox.showinfo(
+                "Login Error", "Please enter both username and password.")
 
     def register_action(self):
         self.master.controller.load_register_view()
