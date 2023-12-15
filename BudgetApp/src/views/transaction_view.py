@@ -63,13 +63,15 @@ class TransactionView(View):
         self.message_label.grid(row=0, column=len(
             columns) + 5, padx=5, pady=5, sticky="nsew")
 
+    #tämän kansssa ongelmmia näyttää eriviärisenä cash balance
     def update_cash_balance_view(self, bal):
-        if bal < 0:
-            balance_colour = "red"
-        elif bal == 0:
-            balance_colour = "yellow"
-        else:
-            balance_colour = "lightgreen"
+        if self.message_label.winfo_exists():
+            if bal < 0:
+                balance_colour = "red"
+            elif bal == 0:
+                balance_colour = "yellow"
+            else:
+                balance_colour = "lightgreen"
 
         self.message_label.config(
             text=str(bal), fg=balance_colour)
@@ -119,7 +121,7 @@ class TransactionView(View):
             save_btn.grid(row=len(self.props["columns"]) + 1,
                           columnspan=len(self.props["columns"]) - 1,
                           pady=10)
-
+        
         self.update_cash_balance_view(
             self.controller.get_income_expense_diff())
 
@@ -179,7 +181,7 @@ class TransactionView(View):
                     self.update_cash_balance_view(
                         self.controller.get_income_expense_diff())
 
-        # self.controller.load_budget_view()
+        self.controller.load_budget_view()
         self.update_cash_balance_view(
             self.controller.get_income_expense_diff())
         window.destroy()
@@ -198,8 +200,8 @@ class TransactionView(View):
             if self.controller.add_income(*values):
                 print("DONE income")
                 self.treeview.insert("", tk.END, values=values)
-                self.update_cash_balance_view(
-                    self.controller.get_income_expense_diff())
+                #self.update_cash_balance_view(self.controller.get_income_expense_diff())
+                self.controller.load_budget_view()
 
         if values[2] == "Expense":
             if values[0] == "":
@@ -212,11 +214,11 @@ class TransactionView(View):
             if self.controller.add_expense(*values):
                 print("DONE expense")
                 self.treeview.insert("", tk.END, values=values)
-                self.update_cash_balance_view(
-                    self.controller.get_income_expense_diff())
-                # self.controller.load_budget_view()
+                
+                self.controller.load_budget_view()
 
         window.destroy()
+        self.update_cash_balance_view(self.controller.get_income_expense_diff())
 
     def delete_row(self):
         selected = self.treeview.selection()
@@ -232,6 +234,7 @@ class TransactionView(View):
                         self.treeview.delete(item_id)
                         self.update_cash_balance_view(
                             self.controller.get_income_expense_diff())
+                        self.controller.load_budget_view()
 
                 if values[2] == "Income":
                     if self.controller.del_income(*values):
@@ -239,6 +242,7 @@ class TransactionView(View):
                         self.treeview.delete(item_id)
                         self.update_cash_balance_view(
                             self.controller.get_income_expense_diff())
+                        self.controller.load_budget_view()
         else:
             messagebox.showerror(
                 "No Row Selected", "Please select a row to delete.")
