@@ -12,77 +12,54 @@ class BudgetView(View):
         self.pack(side=tk.LEFT, fill=tk.BOTH, pady=2, expand=True)
         self.widgets()
 
-
-
     def widgets(self):
         # Back button
-        back_button = tk.Button(self, text="LogOut", command=self.logout_action)
+        back_button = tk.Button(self, text="LogOut",
+                                command=self.logout_action)
         back_button.pack(side=tk.TOP, anchor=tk.NE, padx=10, pady=10)
 
         style = ttk.Style()
-        style.configure("TNotebook.Tab", padding=[10,5], font=("Helvetica", 14))  # Change font size here
+        style.configure("TNotebook.Tab", padding=[10, 5], font=(
+            "Helvetica", 14))  # Change font size here
 
-        
-        columns = ["Amount", "Category", "Description"]
-        categories = ("Income", "Expenses")
+        # columns = ["Amount", "Category", "Description"]
+        # categories = ("Income", "Expenses")
         data = []
-
+        balance = self.master.controller.get_income_expense_diff()
 
         views = ttk.Notebook(self)
 
         expenses_frame = TransactionView(views, props={
             "columns": ["Amount", "Description", "Category"],
             "categories": ["Expense"],
-            "data": self.master.controller.get_expenses()
+            "data": self.master.controller.get_expenses(),
+            "balance": balance
         })
-
 
         incomes_frame = TransactionView(views, props={
             "columns": ["Amount", "Source", "Category"],
             "categories": ["Income"],
-            "data": self.master.controller.get_incomes()
+            "data": self.master.controller.get_incomes(),
+            "balance": balance
         })
 
-
+        '''
         all_frame = TransactionView(views, props={
             "columns": columns,
             "categories": ["Income", "Expenses"],
-            "data": data
+            "data": self.master.controller.get_incomes() + self.master.controller.get_expenses()
         })
+        '''
 
-        #wallet_frame = ttk.Frame(views)
+        # wallet_frame = ttk.Frame(views)
 
         views.add(expenses_frame, text="Expenses")
         views.add(incomes_frame, text="Incomes")
-        views.add(all_frame, text="All")
-        #views.add(wallet_frame, text="My Wallet")
-
+        # views.add(all_frame, text="All")
+        # views.add(wallet_frame, text="My Wallet")
 
         views.pack(expand=True, fill=tk.BOTH)
-
 
     def logout_action(self):
         self.master.config.setAuth("", None)
         self.master.controller.load_login_view()
-
-    def add_income_action(self):
-        self.master.controller.add_income(src, amnt, self.master.config.id)
-        pass
-
-    def add_expense_action(self):
-        pass
-
-    def remove_expense_action(self):
-        # TODO:
-        # message box to confirm deleting
-        pass
-
-    def remove_income_action(self):
-        # TODO:
-        # message box to confirm deleting
-        pass
-
-    def drop_curren_budget_action(self):
-        # TODO:
-        # message box to confirm deleting
-        pass
