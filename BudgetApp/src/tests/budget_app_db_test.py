@@ -1,6 +1,6 @@
 import unittest
 import sqlite3
-from src.database import DBController as db
+from database import DBController as db
 
 
 class TestDataBaseApp(unittest.TestCase):
@@ -8,7 +8,7 @@ class TestDataBaseApp(unittest.TestCase):
         db.db = sqlite3.connect(":memory:")
         db.init_database()
         db.create_tables()
-        user_id = db.create_user("LasseK", "")
+        user_id = db.create_user("LasseK", "Nakkipiilo")
         self.cursor = db.db.cursor()
 
     def tearDown(self):
@@ -30,7 +30,7 @@ class TestDataBaseApp(unittest.TestCase):
 
     def test_add_expense(self):
         user_id = 1
-        db.add_expense(40, "dna lasku", user_id)
+        db.add_expense(40, "dna lasku","Expenses", user_id)
         inserted_datas = self.cursor.execute(
             'SELECT Expenses.amount, Expenses.description, Expenses.user_id FROM Expenses, Users WHERE Users.user_id=Expenses.user_id AND Users.user_id=?;', [user_id]).fetchall()
         inserted_amount, inserted_description, inserted_user_id = inserted_datas[0]
@@ -42,8 +42,8 @@ class TestDataBaseApp(unittest.TestCase):
         user_id = 1
         txkulut = ["dna", "sijoitus", "vuokra", "netflix", "spotify"]
         for kulu in txkulut:
-            db.add_expense(100, kulu, user_id)
-        kulut = db.get_all_expenses(user_id)
+            db.add_expense(100, kulu,"Expenses" , user_id)
+        kulut = db.get_expenses(user_id)
         self.assertTrue(all(kulu in [t[1] for t in kulut] for kulu in txkulut))
 
     def test_get_summ_of_all_expenses(self):
@@ -51,14 +51,14 @@ class TestDataBaseApp(unittest.TestCase):
         txkulut = ["dna", "sijoitus", "vuokra", "netflix", "spotify"]
         txsumma = len(txkulut)*100
         for kulu in txkulut:
-            db.add_expense(100, kulu, user_id)
+            db.add_expense(100, kulu, "Expenses", user_id)
         self.assertEqual(db.get_summ_of_all_expenses(user_id), txsumma)
 
     def test_add_income(self):
         user_id = 1
-        db.add_income("kela", 340, user_id)
+        db.add_income("kela", 340, "Income", user_id)
         inserted_datas = self.cursor.execute(
             'SELECT Incomes.source, Incomes.amount FROM Incomes, Users WHERE Users.user_id = Incomes.user_id AND Users.user_id =?;', [user_id]).fetchall()
-        inserted_source, inserted_amount = inserted_datas[0]
+        inserted_amount, inserted_source = inserted_datas[0]
         self.assertEqual(inserted_source, "kela")
-        self.assertEqual(inserted_amount, 340)
+        self.assertEqual(inserted_amount, "340")

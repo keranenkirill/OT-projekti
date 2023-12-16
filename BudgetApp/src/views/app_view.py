@@ -3,11 +3,11 @@ from views.view_controller import ViewController  # pylint: disable=import-error
 
 class UserConfig():
     def __init__(self):
-        self.id = 0
+        self.user_id = 0
         self.username = 0
 
-    def setAuth(self, username, id):
-        self.id = id
+    def set_auth(self, username, usrid):
+        self.user_id = usrid
         self.username = username
 
 class Application(tk.Tk):

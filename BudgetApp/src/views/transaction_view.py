@@ -3,7 +3,6 @@ from tkinter import ttk
 from tkinter import messagebox
 from views.view import View  # pylint: disable=import-error
 
-
 class TransactionView(View):
 
     def __init__(self, parent, props={}, *args, **kwargs):
@@ -53,9 +52,9 @@ class TransactionView(View):
         self.grid_columnconfigure(0, weight=1)
 
         # Label to show text near the Delete button
-        self.CashBal_label = tk.Label(
+        self.Cash_Bal_label = tk.Label(
             insertFrame, text="Cash Balance:", fg="white", bg="#1C2142")
-        self.CashBal_label.grid(row=0, column=len(
+        self.Cash_Bal_label.grid(row=0, column=len(
             columns) + 4, padx=5, pady=5, sticky="nsew")
 
         self.message_label = tk.Label(
@@ -109,7 +108,6 @@ class TransactionView(View):
                 case _:
                     entry = tk.Entry(window)
                     entry.insert(0, "")
-                    pass
 
             entry.grid(row=i, column=1, padx=10, pady=5)
             entries.append(entry)
@@ -121,9 +119,7 @@ class TransactionView(View):
             save_btn.grid(row=len(self.props["columns"]) + 1,
                           columnspan=len(self.props["columns"]) - 1,
                           pady=10)
-        
-        self.update_cash_balance_view(
-            self.controller.get_income_expense_diff())
+        self.update_cash_balance_view(self.controller.get_income_expense_diff())
 
     def edit_row(self):
         selected = self.treeview.selection()
@@ -146,8 +142,9 @@ class TransactionView(View):
                 entries.append(entry)
 
             save_btn = tk.Button(window,
-                                 text="Save Changes",
-                                 command=lambda: self.save_edit_action(selected, entries, window, selected_item_id))
+                    text="Save Changes",
+                    command=lambda: self.save_edit_action(selected, entries,
+                     window, selected_item_id))
 
             save_btn.grid(row=len(self.props["columns"]) + 1,
                           columnspan=len(self.props["columns"]) - 1,
@@ -214,7 +211,6 @@ class TransactionView(View):
             if self.controller.add_expense(*values):
                 print("DONE expense")
                 self.treeview.insert("", tk.END, values=values)
-                
                 self.controller.load_budget_view()
 
         window.destroy()

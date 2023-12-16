@@ -11,7 +11,6 @@ class RegisterView(View):
         self.widgets()
 
     def widgets(self):
-
         # Back button
         back_button = tk.Button(self, text="Back", command=self.back_action)
         back_button.pack(side=tk.TOP, anchor=tk.NW, padx=10, pady=10)
@@ -53,7 +52,6 @@ class RegisterView(View):
 
     def register_action(self):
         print("registering....")
-        
         u = self.username.get()
         p = self.password.get()
         rp = self.rpassword.get()
@@ -63,9 +61,11 @@ class RegisterView(View):
                 if self.master.controller.register(u, p):
                     self.master.controller.load_login_view(account=u)
                 else:
-                    messagebox.showinfo("Registration Failed", "Username already exists. Please choose a different username.")
+                    messagebox.showinfo("Registration Failed",
+                     "Username already exists. Please choose a different username.")
             else:
-                messagebox.showinfo("Check password", "Passwords do not match. Please enter a valid password.")
+                messagebox.showinfo("Check password",
+                 "Passwords do not match. Please enter a valid password.")
         else:
             messagebox.showinfo("Error", "Please enter a valid username and password.")
 

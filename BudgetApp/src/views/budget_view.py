@@ -1,13 +1,11 @@
 import tkinter as tk
 from tkinter import ttk
-from tkinter import messagebox
-import database  # pylint: disable=import-error
 from views.view import View  # pylint: disable=import-error
 from views.transaction_view import TransactionView
 
 
 class BudgetView(View):
-    def __init__(self, parent, *args, account="", **kwargs):
+    def __init__(self, parent, *args, **kwargs):
         super().__init__(parent, *args, **kwargs,  bg="#1e453e")
         self.pack(side=tk.LEFT, fill=tk.BOTH, pady=2, expand=True)
         self.widgets()
@@ -24,7 +22,6 @@ class BudgetView(View):
 
         # columns = ["Amount", "Category", "Description"]
         # categories = ("Income", "Expenses")
-        data = []
         balance = self.master.controller.get_income_expense_diff()
 
         views = ttk.Notebook(self)
@@ -43,14 +40,12 @@ class BudgetView(View):
             "balance": balance
         })
 
-        '''
-        all_frame = TransactionView(views, props={
-            "columns": columns,
-            "categories": ["Income", "Expenses"],
-            "data": self.master.controller.get_incomes() + self.master.controller.get_expenses()
-        })
-        '''
-
+        #all_frame = TransactionView(views, props={
+        #    "columns": columns,
+        #    "categories": ["Income", "Expenses"],
+        #    "data": self.master.controller.get_incomes() + self.master.controller.get_expenses()
+        #})
+        #
         # wallet_frame = ttk.Frame(views)
 
         views.add(expenses_frame, text="Expenses")
@@ -61,5 +56,5 @@ class BudgetView(View):
         views.pack(expand=True, fill=tk.BOTH)
 
     def logout_action(self):
-        self.master.config.setAuth("", None)
+        self.master.config.set_auth("", None)
         self.master.controller.load_login_view()

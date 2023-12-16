@@ -63,9 +63,9 @@ class LoginView(View):
         password = self.password.get()
 
         if username and password:
-            id = self.master.controller.login(username, password)
-            if id is not None:
-                self.master.config.setAuth(username, id)
+            user_id = self.master.controller.login(username, password)
+            if user_id is not None:
+                self.master.config.set_auth(username, user_id)
                 self.master.controller.load_budget_view()
             else:
                 messagebox.showinfo(
