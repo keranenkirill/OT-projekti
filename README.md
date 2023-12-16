@@ -4,7 +4,7 @@
 # OT harjoitustyö:
 
 ## Budjetointisovellus
-[Release](https://github.com/keranenkirill/OT-projekti/releases/tag/viikko7)
+[Release](https://github.com/keranenkirill/OT-projekti/releases/tag/viikko7_upd)
 
 ### Dokumentaatio
 [_Projektikansio_](./BudgetApp)
