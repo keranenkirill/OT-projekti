@@ -5,7 +5,35 @@ from views.budget_view import BudgetView  # pylint: disable=import-error
 
 
 class ViewController():
+    """
+    Controller class for managing interactions between the application logic and views.
 
+    This class handles the initialization of views, user authentication,
+    and interaction with the database through the 'DBController' class.
+
+    Attributes:
+    - root: The main application window.
+    - context: The currently active view.
+    - db: The database controller instance.
+
+    Methods:
+    - __init__(self, app): Initializes the ViewController instance.
+    - load_register_view(self): Loads the register view, destroying the current context.
+    - load_login_view(self, account=""): Loads the login view, destroying the current context.
+    - load_budget_view(self): Loads the budget view, destroying the current context.
+    - login(self, username, password): Authenticates a user.
+    - register(self, username, password): Creates a new user account.
+    - get_expenses(self): Retrieves expenses for the current user.
+    - get_incomes(self): Retrieves incomes for the current user.
+    - get_sum_of_all_expenses(self): Calculates the total sum of all expenses for the current user.
+    - get_income_expense_diff(self): Calculates the difference between total incomes and total expenses.
+    - add_income(self, *args): Adds a new income for the current user.
+    - upd_income(self, *args): Updates an existing income for the current user.
+    - add_expense(self, *args): Adds a new expense for the current user.
+    - upd_expense(self, *args): Updates an existing expense for the current user.
+    - del_expense(self, *args): Deletes an expense for the current user.
+    - del_income(self, *args): Deletes an income for the current user.
+    """
     def __init__(self, app):
         self.root = app
         self.context = None
@@ -65,6 +93,3 @@ class ViewController():
 
     def del_income(self, *args):
         return self.db.delete_income(*args, usr_id=self.root.config.user_id)
-
-    def log_out(self):
-        pass

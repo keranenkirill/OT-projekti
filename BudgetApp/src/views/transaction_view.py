@@ -4,8 +4,37 @@ from tkinter import messagebox
 from views.view import View  # pylint: disable=import-error
 
 class TransactionView(View):
+    """
+    View class for displaying and managing transactions in the Budget App.
+
+    This class extends the base 'View' class and provides functionality for
+    displaying transaction data, adding, editing, and deleting transactions.
+
+    Attributes:
+    - props (dict): A dictionary containing properties for configuring the view.
+      It includes columns, categories, data, and balance information.
+
+    Methods:
+    - __init__(self, parent, props={}, *args, **kwargs): Initializes the TransactionView instance.
+    - widgets(self): Creates and configures the widgets for the view.
+    - update_cash_balance_view(self, bal): Updates the displayed cash balance with the specified value.
+    - validate_amount(self, amount): Validates the input amount for transactions.
+    - add_row(self): Displays a popup window for adding a new transaction row.
+    - edit_row(self): Displays a popup window for editing a selected transaction row.
+    - save_edit_action(self, selected, entries, window, selected_item_id): Saves changes after editing a row.
+    - save_row_action(self, entries, window): Saves a new row of transaction data.
+    - delete_row(self): Deletes selected transaction row(s) from the view.
+    """
 
     def __init__(self, parent, props={}, *args, **kwargs):
+        """
+        Initializes the TransactionView instance.
+
+        Args:
+            parent: The parent widget.
+            props (dict): A dictionary containing properties for configuring the view.
+            *args, **kwargs: Additional arguments and keyword arguments.
+        """
         super().__init__(parent, bg="#1C2142", *args, **kwargs)
         self.pack(side=tk.LEFT, fill=tk.BOTH, pady=2, expand=True)
         self.props = props
@@ -13,17 +42,20 @@ class TransactionView(View):
         self.controller = parent.master.master.controller
 
     def widgets(self):
-        # propsi kamaa
+        """
+        Creates and configures the widgets for the view.
+        """
         columns = self.props["columns"]
         categories = self.props["categories"]
         data = self.props["data"]
         balance = self.props["balance"]
 
-        # Insert Entry Rows
+        '''
+        Insert Entry Rows
+        '''
         insertFrame = tk.Frame(self, bg="#1C2142")
         insertFrame.pack(pady=5)
 
-        # treeview
         treeview = ttk.Treeview(self, columns=columns,
                                 show="headings", height=15)
         self.treeview = treeview
@@ -34,7 +66,6 @@ class TransactionView(View):
         for item in data:
             treeview.insert("", tk.END, values=item)
 
-        # buttons
         add_btn = tk.Button(insertFrame, text="Add Row", command=self.add_row)
         edit_btn = tk.Button(insertFrame, text="Edit Row",
                              command=self.edit_row)
@@ -51,7 +82,9 @@ class TransactionView(View):
         self.grid_rowconfigure(1, weight=1)
         self.grid_columnconfigure(0, weight=1)
 
-        # Label to show text near the Delete button
+        '''
+        Label to show text near the Delete button
+        '''
         self.Cash_Bal_label = tk.Label(
             insertFrame, text="Cash Balance:", fg="white", bg="#1C2142")
         self.Cash_Bal_label.grid(row=0, column=len(
@@ -64,6 +97,12 @@ class TransactionView(View):
 
     #tämän kansssa ongelmmia näyttää eriviärisenä cash balance
     def update_cash_balance_view(self, bal):
+        """
+        Updates the displayed cash balance with the specified value and colour.
+
+        Args:
+            bal: The new cash balance value.
+        """
         if self.message_label.winfo_exists():
             if bal < 0:
                 balance_colour = "red"
@@ -76,13 +115,22 @@ class TransactionView(View):
             text=str(bal), fg=balance_colour)
 
     def validate_amount(self, amount):
-        # Allow only digits and one dot in the "Amount" entry
+        """
+        Validates the input amount for transactions.
+        Allow only digits and one dot in the "Amount" entry
+
+        Args:
+            amount: The input amount to be validated.
+
+        Returns:
+            bool: True if the amount is valid, False otherwise.
+        """
         return amount.replace('.', '', 1).isdigit()
 
-    def drop_budget(self):
-        pass
-
     def add_row(self):
+        """
+        Displays a popup window for adding a new transaction row.
+        """
         window = tk.Toplevel(self.master)
         window.title("Create New Row")
         window.geometry("+{}+{}".format(self.winfo_rootx() +
@@ -122,6 +170,9 @@ class TransactionView(View):
         self.update_cash_balance_view(self.controller.get_income_expense_diff())
 
     def edit_row(self):
+        """
+        Displays a popup window for editing a selected transaction row.
+        """
         selected = self.treeview.selection()
         if selected:
             values = self.treeview.item(selected, "values")
@@ -157,6 +208,15 @@ class TransactionView(View):
         # self.update_cash_balance_view(self.controller.get_income_expense_diff())
 
     def save_edit_action(self, selected, entries, window, selected_item_id):
+        """
+        Saves changes after editing a row.
+
+        Args:
+            selected: The selected transaction row.
+            entries: List of entry widgets.
+            window: The popup window for editing.
+            selected_item_id: The ID of the selected item in treeview.
+        """
         item_id = selected_item_id
         values = [entry.get() for entry in entries if entry.get() is not None]
         values.append(item_id)
@@ -184,6 +244,13 @@ class TransactionView(View):
         window.destroy()
 
     def save_row_action(self, entries, window):
+        """
+        Saves a new row of transaction data.
+
+        Args:
+            entries: List of entry widgets.
+            window: The popup window for adding a new row.
+        """
         values = [entry.get() for entry in entries if entry.get() is not None]
 
         if values[2] == "Income":
@@ -217,6 +284,9 @@ class TransactionView(View):
         self.update_cash_balance_view(self.controller.get_income_expense_diff())
 
     def delete_row(self):
+        """
+        Deletes selected transaction row(s) from the view.
+        """
         selected = self.treeview.selection()
         if selected:
             for item_id in selected:

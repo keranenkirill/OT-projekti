@@ -7,29 +7,54 @@ class DBController:
 
     @staticmethod
     def execute_statement(query, params):
+        """
+        Executes an SQL statement with parameters.
+
+        Args:
+            query (str): The SQL query.
+            params (list): List of parameters to be substituted into the query.
+
+        Returns:
+            ResultProxy or False: The result of the execution, or False if an exception occurs.
+        """
         try:
             return DBController.db.execute(query, params)
-        except Exception as ex:  # pylint: disable=broad-exception-caught
+        except Exception as ex:
             print(ex)
             return False
 
     def close():  # pylint: disable=no-method-argument
+        """
+        Closes the database connection.
+        """
         DBController.db.close()
         DBController.db = None
 
     @staticmethod
     def init_database(dbpath="budget_app.db"):
+        """
+        Initializes the database connection.
+
+        Args:
+            dbpath (str): Path to the SQLite database file.
+
+        Returns:
+            bool: True if the initialization is successful, False otherwise.
+        """
         try:
             DBController.db = sqlite3.connect(
                 os.path.join(os.getcwd(), dbpath))
             DBController.db.isolation_level = None
-        except Exception as ex:  # pylint: disable=broad-exception-caught
+        except Exception as ex:
             print(ex)
             return False
         return True
 
     @staticmethod
     def create_tables():
+        """
+        Creates database tables for Users, Expenses, and Incomes if they do not exist.
+        """
         DBController.db.execute(
             "CREATE TABLE IF NOT EXISTS Users (user_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             "username VARCHAR(50) NOT NULL, password TEXT NOT NULL);")
@@ -46,12 +71,24 @@ class DBController:
 
     @staticmethod
     def get_table_names():
+        """
+        Retrieves the names of all tables in the database.
+
+        Returns:
+            list: List of table names.
+        """
         query = "SELECT name FROM sqlite_master WHERE type='table';"
         result = DBController.execute_statement(query, [])
         return [table[0] for table in result.fetchall()]
 
     @staticmethod
     def tables_exist():
+        """
+        Checks if the required tables ('Users', 'Expenses', 'Incomes') exist in the database.
+
+        Returns:
+            bool: True if all tables exist, False otherwise.
+        """
         query = (
             "SELECT name FROM sqlite_master "
             "WHERE type='table' AND name IN ('Users', 'Expenses', 'Incomes');"
@@ -61,6 +98,16 @@ class DBController:
 
     @staticmethod
     def create_user(uname, psswd):
+        """
+        Creates a new user in the Users table.
+
+        Args:
+            uname (str): User's username.
+            psswd (str): User's password.
+
+        Returns:
+            int: User ID of the newly created user.
+        """
         DBController.execute_statement(
             "INSERT INTO Users (username, password) VALUES (?, ?)",
             [uname, psswd])
@@ -73,6 +120,16 @@ class DBController:
 
     @staticmethod
     def login_user(username, password):
+        """
+        Logs in a user by checking the username and password.
+
+        Args:
+            username (str): User's username.
+            password (str): User's password.
+
+        Returns:
+            int or None: User ID if login is successful, None otherwise.
+        """
         query = "SELECT username, password, user_id FROM Users WHERE username = ?"
         result = DBController.execute_statement(query, [username]).fetchone()
         print(result)
@@ -83,6 +140,18 @@ class DBController:
 
     @staticmethod
     def add_expense(amnt, descrptn, category, usr_id):
+        """
+        Adds an expense entry for a user in the Expenses table.
+
+        Args:
+            amnt (int): Expense amount.
+            descrptn (str): Expense description.
+            category (str): Expense category.
+            usr_id (int): User ID.
+
+        Returns:
+            ResultProxy or False: The result of the execution, or False if an exception occurs.
+        """
         query = (
             "INSERT INTO Expenses (amount, description, category, user_id) "
             "VALUES (?, ?, ?, ?)"
@@ -94,6 +163,19 @@ class DBController:
 
     @staticmethod
     def delete_expense(amnt, descrptn, category, expense_id, usr_id):
+        """
+        Deletes an expense for a user in the Expenses table.
+
+        Args:
+            amnt (int): Expense amount.
+            descrptn (str): Expense description.
+            category (str): Expense category.
+            expense_id (int): Expense ID.
+            usr_id (int): User ID.
+
+        Returns:
+            ResultProxy or False: The result of the execution, or False if an exception occurs.
+        """
         query = (
             "DELETE FROM Expenses WHERE "
             "amount = ? AND description = ? AND category = ? AND expense_id = ? AND user_id = ?"
@@ -105,6 +187,19 @@ class DBController:
 
     @staticmethod
     def delete_income(amnt, source, category, income_id, usr_id):
+        """
+        Deletes an income for a user in the Incomes table.
+
+        Args:
+            amnt (int): Income amount.
+            source (str): Income source.
+            category (str): Income category.
+            income_id (int): Income ID.
+            usr_id (int): User ID.
+
+        Returns:
+            ResultProxy or False: The result of the execution, or False if an exception occurs.
+        """
         query = (
             "DELETE FROM Incomes WHERE "
             "amount = ? AND source = ? AND category = ? AND income_id = ? AND user_id = ?"
@@ -116,6 +211,15 @@ class DBController:
 
     @staticmethod
     def get_expenses(user_id):
+        """
+        Retrieves all expenses for a specific user from the Expenses table.
+
+        Args:
+            user_id (int): User ID.
+
+        Returns:
+            list: List of tuples representing expenses (amount, description, category, expense_id).
+        """
         query = (
             "SELECT Expenses.amount, Expenses.description, Expenses.category, Expenses.expense_id "
             "FROM Expenses, Users "
@@ -131,6 +235,15 @@ class DBController:
 
     @staticmethod
     def get_summ_of_all_expenses(user_id):
+        """
+        Calculates the total sum of all expenses for a specific user.
+
+        Args:
+            user_id (int): User ID.
+
+        Returns:
+            int: Total sum of expenses.
+        """
         query = (
             "SELECT SUM(Expenses.amount) "
             "FROM Expenses, Users "
@@ -147,6 +260,18 @@ class DBController:
 
     @staticmethod
     def add_income(amnt, src, category, usr_id):
+        """
+        Adds an income for a user in the Incomes table.
+
+        Args:
+            amnt (int): Income amount.
+            src (str): Income source.
+            category (str): Income category.
+            usr_id (int): User ID.
+
+        Returns:
+            ResultProxy or False: The result of the execution, or False if an exception occurs.
+        """
         query = (
             "INSERT INTO Incomes (source, amount, category, user_id) "
             "VALUES (?, ?, ?, ?)"
@@ -156,6 +281,19 @@ class DBController:
 
     @staticmethod
     def update_income(amnt, source, category, income_id, usr_id):
+        """
+        Updates an income for a user in the Incomes table.
+
+        Args:
+            amnt (int): New income amount.
+            source (str): New income source.
+            category (str): New income category.
+            income_id (int): Income ID.
+            usr_id (int): User ID.
+
+        Returns:
+            ResultProxy or False: The result of the execution, or False if an exception occurs.
+        """
         query = (
             "UPDATE Incomes SET "
             "amount=?, source=?, category=? "
@@ -166,6 +304,19 @@ class DBController:
 
     @staticmethod
     def update_expense(amnt, description, category, expense_id, usr_id):
+        """
+        Updates an expense for a user in the Expenses table.
+
+        Args:
+            amnt (int): New expense amount.
+            description (str): New expense description.
+            category (str): New expense category.
+            expense_id (int): Expense ID.
+            usr_id (int): User ID.
+
+        Returns:
+            ResultProxy or False: The result of the execution, or False if an exception occurs.
+        """
         query = (
             "UPDATE Expenses SET "
             "amount=?, description=?, category=? "
@@ -176,6 +327,15 @@ class DBController:
 
     @staticmethod
     def get_incomes(user_id):
+        """
+        Retrieves all incomes for a specific user from the Incomes table.
+
+        Args:
+            user_id (int): User ID.
+
+        Returns:
+            list: List of tuples representing incomes (amount, source, category, income_id).
+        """
         query = (
             "SELECT Incomes.amount, Incomes.source, Incomes.category, Incomes.income_id "
             "FROM Incomes, Users "
@@ -191,6 +351,15 @@ class DBController:
 
     @staticmethod
     def get_all_incomes_expenses(user_id):
+        """
+        Retrieves all incomes and expenses for a specific user from the Incomes and Expenses tables.
+
+        Args:
+            user_id (int): User ID.
+
+        Returns:
+            list: List of tuples representing incomes and expenses.
+        """
         query = (
             "SELECT Incomes.amount, Incomes.source, Expenses.amount, Expenses.description "
             "FROM Incomes, Expenses, Users "
@@ -203,6 +372,15 @@ class DBController:
 
     @staticmethod
     def get_summ_of_all_incomes(user_id):
+        """
+        Calculates the total sum of all incomes for a specific user.
+
+        Args:
+            user_id (int): User ID.
+
+        Returns:
+            int: Total sum of incomes.
+        """
         query = (
             "SELECT SUM(Incomes.amount) "
             "FROM Incomes, Users "
@@ -219,6 +397,16 @@ class DBController:
 
     @staticmethod
     def get_income_expense_diff(user_id):
+        """
+        Calculates the difference between total incomes and total expenses for a specific user.
+
+        Args:
+            user_id (int): User ID.
+
+        Returns:
+            int: Difference between total incomes and total expenses.
+        """
+        
         tul_yhtsym = DBController.get_summ_of_all_incomes(user_id)
         men_yhtsum = DBController.get_summ_of_all_expenses(user_id)
         print("Tulot yhteensä:", tul_yhtsym)
@@ -229,6 +417,12 @@ class DBController:
 
     @staticmethod
     def clear_expenses_by_user_id(user_id):
+        """
+        Clears all expenses for a specific user from the Expenses table.
+
+        Args:
+            user_id (int): User ID.
+        """
         query = "DELETE FROM Expenses WHERE user_id = ?;"
         parameters = [user_id]
         DBController.execute_statement(query, parameters)
@@ -236,6 +430,12 @@ class DBController:
 
     @staticmethod
     def clear_incomes_by_user_id(user_id):
+        """
+        Clears all incomes for a specific user from the Incomes table.
+
+        Args:
+            user_id (int): User ID.
+        """
         query = "DELETE FROM Incomes WHERE user_id = ?;"
         parameters = [user_id]
         DBController.execute_statement(query, parameters)
@@ -243,6 +443,12 @@ class DBController:
 
     @staticmethod
     def clear_user_and_data_by_id(user_id):
+        """
+        Deletes a user and associated data (expenses and incomes) by user ID.
+
+        Args:
+            user_id (int): User ID.
+        """
         query = "DELETE FROM Users WHERE user_id = ?;"
         parameters = [user_id]
         DBController.execute_statement(query, parameters)

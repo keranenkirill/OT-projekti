@@ -4,13 +4,40 @@ from views.view import View  # pylint: disable=import-error
 
 
 class RegisterView(View):
+    """
+    View class for user registration in the Budget App.
+
+    This class provides a user interface for registering a new account.
+    It includes input fields for username, password, and repeat password.
+
+    Attributes:
+    - username (tk.Entry): Entry widget for entering the username.
+    - password (tk.Entry): Entry widget for entering the password.
+    - rpassword (tk.Entry): Entry widget for entering the repeated password.
+
+    Methods:
+    - __init__(self, parent, *args, **kwargs): Initializes the RegisterView instance.
+    - widgets(self): Creates and configures the widgets for the registration view.
+    - register_action(self): Handles the registration process when the button is clicked.
+    - back_action(self): Navigates back to the login view.
+    """
 
     def __init__(self, parent, *args, **kwargs):
+        """
+        Initializes the RegisterView instance.
+
+        Args:
+            parent: The parent widget.
+            *args, **kwargs: Additional arguments and keyword arguments.
+        """
         super().__init__(parent, bg="#1C2142", *args, **kwargs)
         self.pack(side=tk.LEFT, fill=tk.BOTH, pady=2, expand=True)
         self.widgets()
 
     def widgets(self):
+        """
+        Creates and configures the widgets for the registration view.
+        """
         # Back button
         back_button = tk.Button(self, text="Back", command=self.back_action)
         back_button.pack(side=tk.TOP, anchor=tk.NW, padx=10, pady=10)
@@ -51,6 +78,9 @@ class RegisterView(View):
         self.rpassword = rpwdentry
 
     def register_action(self):
+        """
+        Handles the registration process when the button is clicked.
+        """
         print("registering....")
         u = self.username.get()
         p = self.password.get()
@@ -70,4 +100,7 @@ class RegisterView(View):
             messagebox.showinfo("Error", "Please enter a valid username and password.")
 
     def back_action(self):
+        """
+        Navigates back to the login view.
+        """
         self.master.controller.load_login_view()

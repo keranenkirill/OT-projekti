@@ -3,6 +3,32 @@ import sqlite3
 from database import DBController as db
 
 class TestDataBaseApp(unittest.TestCase):
+    """
+    Test case class for the database functionality of the application.
+
+    This test suite covers various aspects of the database operations,
+    including table creation, user authentication, data insertion, and retrieval.
+    
+    test case overage: 94%
+
+    Test methods:
+    - test_create_tables
+    - test_login_user
+    - test_tables_exist
+    - test_create_user
+    - test_add_expense
+    - test_get_all_expenses
+    - test_get_summ_of_all_expenses
+    - test_add_income
+    - test_get_income_expense_diff
+    - test_get_summ_of_all_incomes
+    - test_get_all_incomes_expenses
+    - test_delete_expense
+    - test_delete_income
+    - test_update_income
+    - test_update_expense
+    - test_clear_user_and_data_by_id
+    """
     def setUp(self):
         db.db = sqlite3.connect(":memory:")
         db.init_database()
