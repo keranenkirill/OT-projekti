@@ -1,6 +1,7 @@
 import os
 import sqlite3
 
+
 class DBController:
     db = None
 
@@ -28,15 +29,6 @@ class DBController:
         return True
 
     @staticmethod
-    def tables_exist():
-        query = (
-            "SELECT name FROM sqlite_master "
-            "WHERE type='table' AND name IN ('Users', 'Expenses', 'Incomes');"
-        )
-        result = DBController.execute_statement(query, [])
-        return bool(result.fetchone())
-
-    @staticmethod
     def create_tables():
         DBController.db.execute(
             "CREATE TABLE IF NOT EXISTS Users (user_id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -51,6 +43,21 @@ class DBController:
             "amount INTEGER NOT NULL, source TEXT NOT NULL, "
             "category TEXT DEFAULT 'Income' NOT NULL, user_id INTEGER NOT NULL, "
             "FOREIGN KEY (user_id) REFERENCES Users (user_id) ON DELETE CASCADE);")
+
+    @staticmethod
+    def get_table_names():
+        query = "SELECT name FROM sqlite_master WHERE type='table';"
+        result = DBController.execute_statement(query, [])
+        return [table[0] for table in result.fetchall()]
+
+    @staticmethod
+    def tables_exist():
+        query = (
+            "SELECT name FROM sqlite_master "
+            "WHERE type='table' AND name IN ('Users', 'Expenses', 'Incomes');"
+        )
+        result = DBController.execute_statement(query, [])
+        return bool(result.fetchone())
 
     @staticmethod
     def create_user(uname, psswd):
@@ -130,7 +137,8 @@ class DBController:
             "WHERE Users.user_id = Expenses.user_id AND Users.user_id = ?;"
         )
         parameters = [user_id]
-        kulujen_yhteissumma = DBController.execute_statement(query, parameters).fetchone()
+        kulujen_yhteissumma = DBController.execute_statement(
+            query, parameters).fetchone()
         print("     HAETTU KÄYTTÄJÄN", user_id, "KULUJEN YHTEISSUMMA:")
         print("     ", kulujen_yhteissumma[0])
         if kulujen_yhteissumma is not None and kulujen_yhteissumma[0] is not None:
@@ -213,6 +221,8 @@ class DBController:
     def get_income_expense_diff(user_id):
         tul_yhtsym = DBController.get_summ_of_all_incomes(user_id)
         men_yhtsum = DBController.get_summ_of_all_expenses(user_id)
+        print("Tulot yhteensä:", tul_yhtsym)
+        print("Menot yhteensä:", men_yhtsum)
         print("     HAETTU KÄYTTÄJÄN", user_id, "TULOJEN JA MENOJEN EROTUS:")
         print("     ", tul_yhtsym - men_yhtsum)
         return tul_yhtsym - men_yhtsum
