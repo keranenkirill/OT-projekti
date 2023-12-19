@@ -1,5 +1,6 @@
 ## Komentorivitoiminnot
 ### Asennus
+:warning: KAIKKI KOMENNOT TOTEUTETAAN BudgetApp -hakemistossa :warning:
 
 1. Asenna riippuvuudet:
 
@@ -7,7 +8,7 @@
 poetry install
 ```
 
-2. Suorita vaadittavat alustustoimenpiteet:
+2. Suorita vaadittavat alustustoimenpiteet tietokannalle:
 
 ```bash
 poetry run invoke build
@@ -35,11 +36,16 @@ poetry run invoke test
 Testikattavuusraportin generoidaan komennolla:
 
 ```bash
-poetry run invoke coverage
+poetry run invoke coveragehtml
 ```
 
 Raportti löytyy _htmlcov_-hakemistosta.
 ##
+### Pytest
+```bash
+poetry run invoke test
+```
+
 ### Pylint
 
 Tiedoston [.pylintrc](./.pylintrc) määrittelemät tarkistukset:
