@@ -1,6 +1,6 @@
 # Käyttoohje
 
-Kun olet [asentanut ja tehnyt tarvittavat alustustoimentpiteet](https://github.com/keranenkirill/OT-projekti?tab=readme-ov-file#asennus).
+Kun olet [asentanut ja tehnyt tarvittavat alustustoimenpiteet](https://github.com/keranenkirill/OT-projekti?tab=readme-ov-file#asennus).
 
 ## Kirjautuminen
 
