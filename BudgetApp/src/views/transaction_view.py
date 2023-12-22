@@ -97,13 +97,13 @@ class TransactionView(View):
         self.message_label.grid(row=0, column=len(
             columns) + 5, padx=5, pady=5, sticky="nsew")
 
-    #tämän kansssa ongelmmia näyttää eriviärisenä cash balance
+    #tämän kansssa ongelmmia näyttää väärän värisenä cash balance
     def update_cash_balance_view(self, bal):
         """
         Updates the displayed cash balance with the specified value and colour.
 
         Args:
-            bal: The new cash balance value.
+            bal: The new cash balance value and text colour.
         """
         if self.message_label.winfo_exists():
             if bal < 0:
@@ -266,7 +266,6 @@ class TransactionView(View):
             if self.controller.add_income(*values):
                 print("DONE income")
                 self.treeview.insert("", tk.END, values=values)
-                #self.update_cash_balance_view(self.controller.get_income_expense_diff())
                 self.controller.load_budget_view()
 
         if values[2] == "Expense":
