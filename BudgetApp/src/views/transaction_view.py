@@ -17,11 +17,13 @@ class TransactionView(View):
     Methods:
     - __init__(self, parent, props={}, *args, **kwargs): Initializes the TransactionView instance.
     - widgets(self): Creates and configures the widgets for the view.
-    - update_cash_balance_view(self, bal): Updates the displayed cash balance with the specified value.
+    - update_cash_balance_view(self, bal): 
+      Updates the displayed cash balance with the specified value.
     - validate_amount(self, amount): Validates the input amount for transactions.
     - add_row(self): Displays a popup window for adding a new transaction row.
     - edit_row(self): Displays a popup window for editing a selected transaction row.
-    - save_edit_action(self, selected, entries, window, selected_item_id): Saves changes after editing a row.
+    - save_edit_action(self, selected, entries, window, selected_item_id): 
+      Saves changes after editing a row.
     - save_row_action(self, entries, window): Saves a new row of transaction data.
     - delete_row(self): Deletes selected transaction row(s) from the view.
     """
@@ -53,8 +55,8 @@ class TransactionView(View):
         '''
         Insert Entry Rows
         '''
-        insertFrame = tk.Frame(self, bg="#1C2142")
-        insertFrame.pack(pady=5)
+        insert_frame = tk.Frame(self, bg="#1C2142")
+        insert_frame.pack(pady=5)
 
         treeview = ttk.Treeview(self, columns=columns,
                                 show="headings", height=15)
@@ -66,17 +68,17 @@ class TransactionView(View):
         for item in data:
             treeview.insert("", tk.END, values=item)
 
-        add_btn = tk.Button(insertFrame, text="Add Row", command=self.add_row)
-        edit_btn = tk.Button(insertFrame, text="Edit Row",
+        add_btn = tk.Button(insert_frame , text="Add Row", command=self.add_row)
+        edit_btn = tk.Button(insert_frame , text="Edit Row",
                              command=self.edit_row)
         delete_btn = tk.Button(
-            insertFrame, text="Delete Row", command=self.delete_row)
+            insert_frame , text="Delete Row", command=self.delete_row)
 
         add_btn.grid(row=0, column=len(columns) + 1, padx=5, pady=5)
         edit_btn.grid(row=0, column=len(columns) + 2, padx=5, pady=5)
         delete_btn.grid(row=0, column=len(columns) + 3, padx=5, pady=5)
 
-        insertFrame.grid(row=0, column=0, sticky="ew")
+        insert_frame .grid(row=0, column=0, sticky="ew")
         treeview.grid(row=1, column=0, sticky="nsew")
 
         self.grid_rowconfigure(1, weight=1)
@@ -85,13 +87,13 @@ class TransactionView(View):
         '''
         Label to show text near the Delete button
         '''
-        self.Cash_Bal_label = tk.Label(
-            insertFrame, text="Cash Balance:", fg="white", bg="#1C2142")
-        self.Cash_Bal_label.grid(row=0, column=len(
+        self.cash_bal_label = tk.Label(
+            insert_frame , text="Cash Balance:", fg="white", bg="#1C2142")
+        self.cash_bal_label.grid(row=0, column=len(
             columns) + 4, padx=5, pady=5, sticky="nsew")
 
         self.message_label = tk.Label(
-            insertFrame, text=balance, fg="white", bg="#1C2142")
+            insert_frame , text=balance, fg="white", bg="#1C2142")
         self.message_label.grid(row=0, column=len(
             columns) + 5, padx=5, pady=5, sticky="nsew")
 

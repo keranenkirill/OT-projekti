@@ -38,7 +38,8 @@ class Application(tk.Tk):
 
     Attributes:
     - config (UserConfig): An instance of the UserConfig class to store user-related information.
-    - controller (ViewController): An instance of the ViewController class to handle application logic.
+    - controller (ViewController): 
+      An instance of the ViewController class to handle application logic.
 
     Methods:
     - __init__(self, title, width=800, height=600): Initializes the Application instance.

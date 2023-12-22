@@ -406,7 +406,7 @@ class DBController:
         Returns:
             int: Difference between total incomes and total expenses.
         """
-        
+
         tul_yhtsym = DBController.get_summ_of_all_incomes(user_id)
         men_yhtsum = DBController.get_summ_of_all_expenses(user_id)
         print("Tulot yhteensä:", tul_yhtsym)

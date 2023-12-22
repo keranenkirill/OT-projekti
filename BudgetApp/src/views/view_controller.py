@@ -26,7 +26,8 @@ class ViewController():
     - get_expenses(self): Retrieves expenses for the current user.
     - get_incomes(self): Retrieves incomes for the current user.
     - get_sum_of_all_expenses(self): Calculates the total sum of all expenses for the current user.
-    - get_income_expense_diff(self): Calculates the difference between total incomes and total expenses.
+    - get_income_expense_diff(self): 
+      Calculates the difference between total incomes and total expenses.
     - add_income(self, *args): Adds a new income for the current user.
     - upd_income(self, *args): Updates an existing income for the current user.
     - add_expense(self, *args): Adds a new expense for the current user.
@@ -93,3 +94,5 @@ class ViewController():
 
     def del_income(self, *args):
         return self.db.delete_income(*args, usr_id=self.root.config.user_id)
+
+        
