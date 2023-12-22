@@ -12,7 +12,7 @@
 
 ## Komentorivitoiminnot
 ### Asennus
-Suorita tässä olevat lähdekoodin asennusohjeet: [Release](https://github.com/keranenkirill/OT-projekti/releases/tag/viikko7_upd)
+Suorita tässä olevat lähdekoodin asennusohjeet: [Release](https://github.com/keranenkirill/OT-projekti/releases/tag/loppupalautus)
 
 
 ⚠️ **Kaikki alla olevat komennot suoritettava BudgetApp -hakemistossa** ⚠️
