@@ -12,7 +12,7 @@ Sovelluksella on ainoastaan yksi käyttäjärooli.
 
 Sovellus koostuu kuudesta eri näkymästä:
 
-[**_kuva käyttöliittymäluonnoksesta_**](./OHTE_harjoitustyo_luonnos_budjettisovellus.pdf)
+![](./kuvat/OHTE_kayttoliittymaluonnos.png)
 
 Sovellus aukeaa kirjautumisnäkymään, josta on mahdollista siirtyä uuden käyttäjän luomisnäkymään tai kirjautuneena päänäkymään.
 
@@ -21,7 +21,6 @@ Sovellus aukeaa kirjautumisnäkymään, josta on mahdollista siirtyä uuden käy
 ### Ennen kirjautumista
 
 - Käyttäjä voi luoda järjestelmään käyttäjätunnuksen
-  - Käyttäjätunnuksen täytyy olla uniikki
 - Käyttäjä voi kirjautua järjestelmään
   - Kirjautuminen onnistuu syötettäessä olemassaoleva käyttäjätunnus ja salasana kirjautumislomakkeelle
   - Jos käyttäjää ei olemassa, tai salasana ei täsmää,niin ilmestyy virheviesti
@@ -29,13 +28,14 @@ Sovellus aukeaa kirjautumisnäkymään, josta on mahdollista siirtyä uuden käy
 ### Kirjautumisen jälkeen
 
 - Käyttäjä näkee oman budjetti näkymän
-- Käyttäjä voi luoda uuden butjetin nollaamalla nykyisen
+- Käyttäjä voi luoda uuden butjetin
   - Luotu budjetti näkyy ainoastaan sen luoneelle käyttäjälle
 - Käyttäjä voi lisätä/poistaa tuloja ja menoja
 - Käyttäjä voi kirjautua ulos järjestelmästä
+- Tulojen ja kulujen erotuksena jäävä käteisvara näkyy käyttäjälle
 
 ## Jatkokehitysideoita
-
+- Käyttäjätunnuksen täytyy olla uniikki
 - Oleamassa olevien yksittäisten tulojen/menojen muokkaaminen 
 - Käyttäjätiimit, jotka näkevät kaikki yhteiset budjetit
 - Mahdollisuus useampaan erilliseen budjettinäkymään
