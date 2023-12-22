@@ -91,7 +91,7 @@ sequenceDiagram
   participant transaction_view
   participant database
   
-  User-> User: assume we user just logged in and clicked Expenses tab...
+  User-> User: assume that user just logged in and clicked Expenses tab...
   User->> UI: click "Add row" button
   UI->> budget_view: load_budget_view()
   budget_view->> transaction_view: add_row()
