@@ -1,6 +1,7 @@
 # **Aineopintojen harjoitustyö: ohjelmistotekniikka, syksy 2023**
 
 # BudgetApp
+Sovellus, jossa käyttäjä voi lisätä ja poistaa tuloja/kuluja, sekä nähdä, paljonko kuluista tulojen jälkeen jää käteen.
 
 ## Dokumentaatio
 - [_Sovelluksen käyttöohje_](./BudgetApp/dokumentaatio/kayttoohje.md)
@@ -9,6 +10,7 @@
 - [_Testausdokumentti_](./BudgetApp/dokumentaatio/testaus.md)
 - [_Työaikakirjanpito_](./BudgetApp/dokumentaatio/tuntikirjanpito.md)
 - [_Changelog_](./BudgetApp/dokumentaatio/Changelog.md)
+- [_Laajan kielimallin käyttö projektin kehityksessä (LLM)_](./BudgetApp/dokumentaatio/chatgpt_selvitys.md)
 
 ## Komentorivitoiminnot
 ### Asennus
