@@ -5,7 +5,7 @@
 ## Dokumentaatio
 - [_Sovelluksen käyttöohje_](./BudgetApp/dokumentaatio/kayttoohje.md)
 - [_Vaatimusmäärittely_](./BudgetApp/dokumentaatio/vaativuusmaarittely.md)
-- [_Arkkitehtuurikuvaus_]() (tulossa)
+- [_Arkkitehtuurikuvaus_](./BudgetApp/dokumentaatio/arkkitehtuuri.md)
 - [_Testausdokumentti_](./BudgetApp/dokumentaatio/testaus.md)
 - [_Työaikakirjanpito_](./BudgetApp/dokumentaatio/tuntikirjanpito.md)
 - [_Changelog_](./BudgetApp/dokumentaatio/Changelog.md)
