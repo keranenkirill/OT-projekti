@@ -22,7 +22,11 @@
 | 6.12.  |  5   | Budget viewin uudistamisen aloitus ja toiminallisuuksien kehittämistä|
 | 9.12.  |  6   | Budget viewin kehittämistä toiminallisuuksien kanssa|
 | 12.12.  |  6   | RELEASE2(pre-release), koodin refaktorointia, bugien korjausta ja tietokannan yhdistämistä|
-| sum(h) |  85,5  |  
+| 17.12.  |  5   | lisää testejä, docstring ja koodin dokumentaatio|
+| 19.12.  |  1   | Changelog |
+| 21.12.  |  3   | sovelluksen käyttöohjeet|
+| 22.12.  |  6   | arkkitehtuurikuvaus, vaatimusmäärittelyn päivitys ajankohtaiseksi, pylin diasble korjaamista, loppupalautus -release|
+| sum(h) |  100,5  |  
 
 
 
