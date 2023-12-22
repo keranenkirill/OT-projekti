@@ -3,7 +3,7 @@
 ## Käyttöliittymä
 Käyttöliittymä koostuu näkymistä:
 - Kirjautuminen
-- Kunnuksenluonti
+- Tunnuksenluonti
 - BudgetView
    -  avautuvat ikkunat:
       - tulon/menon lisääminen ja tietojen syöttäminen
